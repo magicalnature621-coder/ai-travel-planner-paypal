@@ -1,8 +1,10 @@
-# AI Travel Planner ✈️
+# AI Travel Planner ✈️ — PayPal edition
 
 Plan and book a whole trip across India in one flow: search flights, trains and buses, pick a hotel or hostel, see restaurant picks, add traveller details, pay by card or UPI, and get tickets on email and WhatsApp with a day-by-day AI itinerary.
 
-**Stack:** Next.js 15 (App Router) · TypeScript · Tailwind CSS 4 · PostgreSQL + Prisma · Claude (itinerary) · Razorpay · Resend · Twilio · pdf-lib
+**Payments:** integrated with the **PayPal developer platform (sandbox)**: PayPal JavaScript SDK Smart Payment Buttons on the checkout page, and the Orders v2 REST API on the server to create the order, capture it after buyer approval, and verify status, booking ID and amount before a booking is confirmed. Setup: see section 4 of [SETUP.md](SETUP.md).
+
+**Stack:** Next.js 15 (App Router) · TypeScript · Tailwind CSS 4 · PostgreSQL + Prisma · Groq / Claude (AI itinerary) · PayPal (sandbox) · Razorpay · Resend · Twilio · pdf-lib
 
 ## Run locally
 ```bash
