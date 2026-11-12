@@ -71,7 +71,6 @@ export default function PaymentForm({ tripId, amount, razorpay, paypal, prefill,
     loadPayPal(paypal.clientId, paypal.currency).then((ok) => {
       if (cancelled || !paypalRef.current) return;
       if (!ok || !window.paypal) return setPaypalState("failed");
-      paypalRef.current.innerHTML = "";
       window.paypal
         .Buttons({
           style: { layout: "vertical", shape: "rect", label: "pay", height: 48 },
@@ -190,9 +189,9 @@ export default function PaymentForm({ tripId, amount, razorpay, paypal, prefill,
               Trip total <b className="text-slate-800">{inr(amount)}</b>
               {paypal.currency !== "INR" && <> · charged as <b className="text-slate-800">{paypal.currency} {paypal.value}</b></>}. Pay with your PayPal balance or a card.
             </p>
-            <div ref={paypalRef} className="mt-5 min-h-[120px]">
-              {paypalState === "loading" && <div className="skeleton h-12 rounded-xl" />}
-            </div>
+            {/* The PayPal SDK owns this container's contents, so React must not render children inside it */}
+            {paypalState === "loading" && <div className="skeleton mt-5 h-12 rounded-xl" />}
+            <div ref={paypalRef} className="mt-5 min-h-[120px]" />
             {paypalState === "failed" && <p className="mt-2 rounded-lg bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700">Couldn&apos;t load PayPal. Check your internet connection and PAYPAL_CLIENT_ID.</p>}
             {error && <p className="mt-3 rounded-lg bg-rose-50 px-3 py-2 text-sm font-medium text-rose-700">{error}</p>}
             <p className="mt-3 flex items-center justify-center gap-1.5 text-xs text-slate-400"><Lock className="h-3.5 w-3.5" /> Payment verified on our server before your booking is confirmed</p>
